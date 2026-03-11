@@ -1,0 +1,28 @@
+shape: sequence_diagram
+
+bruker: {
+  shape: person
+}
+
+cloudnotes: {
+  shape: person
+}
+
+supabase: {
+  shape: person
+}
+
+bruker.t1 -> cloudnotes.t1: fyll inn login detaljer, trykk login
+cloudnotes.t1 -> supabase.t1: supabase authtoken
+cloudnotes.t1 <- supabase.t1: return jwt token
+cloudnotes.t1 -> cloudnotes.t1: naviger til home skjerm
+bruker.t1 <- cloudnotes.t1
+bruker.t2 -> cloudnotes.t2: -> trykk på create note tab
+cloudnotes.t2 -> cloudnotes.t2: naviger til create note skjerm
+bruker.t2 <- cloudnotes.t2
+bruker.t3 -> cloudnotes.t3: fyller inn notat detaljer, trykk lag notat
+cloudnotes.t3 -> supabase.t3: notat data
+supabase.t3 -> supabase.t3: lagre notat i database
+cloudnotes.t3 <- supabase.t3: ok
+cloudnotes.t3 -> cloudnotes.t3: presenter "notat laget" beskjed
+bruker.t3 -> cloudnotes.t3

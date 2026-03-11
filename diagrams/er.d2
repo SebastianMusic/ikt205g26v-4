@@ -1,0 +1,18 @@
+note: {
+  shape: sql_table
+  title: text
+  body: text
+  created_at: timestamptz
+  id: uuid {constraint: [primary_key; unique]}
+  user_id: uuid {constraint: [foreign_key]}
+}
+
+auth: {
+  shape: sql_table
+  users\.id: uuid {constraint: [primary_key; unique]}
+}
+
+note.user_id -- auth.users\.id: {
+  source-arrowhead: *
+  target-arrowhead: 1
+}

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "142167100786",
+    "project_id": "cloudnotes-3ace6",
+    "storage_bucket": "cloudnotes-3ace6.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:142167100786:android:e1e0f7c27b8d8aed4161eb",
+        "android_client_info": {
+          "package_name": "com.wijo.cloudnotes"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwagMDMR6Ga8ojT2sGaUUVPPsAFZ9xuC8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
