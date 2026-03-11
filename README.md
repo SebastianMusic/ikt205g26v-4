@@ -1,16 +1,5 @@
 # lenke til repo
-HUSK å GJøR REPO OFFENTLIG
-HUSK å GJøR REPO OFFENTLIG
-HUSK å GJøR REPO OFFENTLIG
-HUSK å GJøR REPO OFFENTLIG
-HUSK å GJøR REPO OFFENTLIG
 https://github.com/SebastianMusic/ikt205g26v-4
-HUSK å GJøR REPO OFFENTLIG
-HUSK å GJøR REPO OFFENTLIG
-HUSK å GJøR REPO OFFENTLIG
-HUSK å GJøR REPO OFFENTLIG
-HUSK å GJøR REPO OFFENTLIG
-HUSK å GJøR REPO OFFENTLIG
 
 # bygginginstruksjoner
 ## Felles instruksjoner
@@ -47,7 +36,7 @@ eas  build --platform android --profile preview --local
 
 
 # oppnådde krav
-# 1. The Testing Suite (35%)
+## 1. The Testing Suite (35%)
 
 ### Bruk Jest eller annet et egnet test-bibliotek for å verifisere kjernefunksjonaliteten.
 
@@ -55,7 +44,7 @@ eas  build --platform android --profile preview --local
 - [x] (15%) Integration Test - Mocking & Loader: Lag en test som simulerer henting av et notat fra databasen. Testen skal verifisere at en "laste-indikator" (spinner/loader) er synlig mens kallet pågår, og at den forsvinner når det enkelte notatet er lastet inn.
 - [x] (10%) Auth Guard Test - Tilgangskontroll: Test at appens beskyttede innhold (f.eks. "Legg til notat"-skjermen eller selve notatlisten) ikke er tilgjengelig eller synlig dersom brukeren ikke er logget inn.
  
-# 2. Production Readiness & Optimization (40%)
+## 2. Production Readiness & Optimization (40%)
 
 ### Gjør appen robust og effektiv for sluttbrukeren.
 
@@ -66,7 +55,7 @@ eas  build --platform android --profile preview --local
 - [x] (10%) Endre logikken for henting av notater slik at appen kun henter de 5 første notatene fra databasen.
 - [x] (10%) Implementer en "Last mer"-knapp (eller automatisk "infinite scroll") som henter de neste 5 notatene.
 
-# 3. Build & Dokumentasjon (25%)
+## 3. Build & Dokumentasjon (25%)
 
 ### Dokumentasjon av selve leveranseprosessen.
 
