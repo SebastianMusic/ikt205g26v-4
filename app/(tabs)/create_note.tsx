@@ -78,18 +78,18 @@ export default function HomeScreen() {
 	}
 
 
-	useEffect(() => {
-		console.log("inside use effect")
-		getNotes().then(notes => {
-			const parsedNotes = NoteSchema.array().safeParse(notes)
-			if (parsedNotes.error) {
-				console.error("getNotes returned null")
-				return
-			}
-			setNotes(parsedNotes.data)
-		})
-		console.log(" after")
-	}, []);
+	// useEffect(() => {
+	// 	console.log("inside use effect")
+	// 	getNotes().then(notes => {
+	// 		const parsedNotes = NoteSchema.array().safeParse(notes)
+	// 		if (parsedNotes.error) {
+	// 			console.error("getNotes returned null")
+	// 			return
+	// 		}
+	// 		setNotes(parsedNotes.data)
+	// 	})
+	// 	console.log(" after")
+	// }, []);
 
 
 	useEffect(() => {
@@ -125,6 +125,7 @@ export default function HomeScreen() {
 			}
 			if (pictureExists) setShowImageUploadingIndicator(false)
 		})
+		router.navigate('/home')
 
 	}
 
@@ -181,7 +182,7 @@ export default function HomeScreen() {
 						</View>
 					}
 
-					<Button disabled={showImageUploadingIndicator} title="lagre" onPress={() => {
+					<Button testID='saveButton' disabled={showImageUploadingIndicator} title="lagre" onPress={() => {
 						if (pictureStore.pictureRef == null) {
 							createNoteWrapper()
 						} else {

@@ -1,0 +1,3 @@
+process.env.EXPO_PUBLIC_SUPABASE_URL = 'https://yhmkbmrzidghyakmzwki.supabase.co'
+process.env.EXPO_PUBLIC_SUPABASE_KEY = 'sb_publishable_cYxXFcrEgHOqb0pOeIOz3A_TMXgeBEj'
+

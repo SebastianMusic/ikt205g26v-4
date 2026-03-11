@@ -8,6 +8,7 @@ import { useColorScheme } from '@/hooks/use-color-scheme';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { TouchableOpacity } from 'react-native';
 import { supabase } from '@/utils/supabase';
+import AuthTab from '@/components/AuthTab'
 
 export default function TabLayout() {
 	const router = useRouter()
@@ -15,25 +16,6 @@ export default function TabLayout() {
 	const colorScheme = "light"
 
 
-	function AuthTab({ children, path, ...props }: any) {
-		const handlePress = () => {
-			supabase.auth.getClaims().then(({ data, error }) => {
-				if (data == null || error) {
-					alert(`Du har ikke tilgang til ${path}. Logg inn først`)
-					return
-				}
-				router.navigate(path)
-
-			})
-
-		}
-		return (
-			<TouchableOpacity style={{ flex: 1, justifyContent: "center", alignItems: "center" }} onPress={handlePress}>
-				{children}
-			</TouchableOpacity>
-
-		)
-	}
 
 
 	return (
