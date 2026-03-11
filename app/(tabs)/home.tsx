@@ -22,6 +22,7 @@ import * as Notifications from 'expo-notifications';
 import Constants from 'expo-constants';
 import { useNoteStore } from '@/utils/store';
 import LoadingIndicator from '@/components/loadingIndicator';
+import { generateNotes } from '@/utils/dummy';
 
 export default function HomeScreen() {
 	const router = useRouter()
@@ -29,22 +30,31 @@ export default function HomeScreen() {
 	const noteStore = useNoteStore()
 	const notes = noteStore.notes
 	const setNotes = noteStore.setNotes
+	const FETCH_INCREMENT = 5
 	const [refreshKey, setRefreshKey] = useState(0)
 	const [showNoteLoadingIndicator, setShowNoteLoadingIndicator] = useState(false)
 	function getNotesSyncWrapper() {
 		setShowNoteLoadingIndicator(true)
-		getNotes().then(notes => {
-			const parsedNotes = NoteSchema.array().safeParse(notes)
+		const noteCount = notes.length
+		const fetchStart = noteCount
+		const fetchEnd = noteCount + FETCH_INCREMENT - 1
+		getNotes(fetchStart, fetchEnd).then(fetchedNotes => {
+			console.log(`trying to fetch ${noteCount}, from ${fetchStart} to ${fetchEnd}`)
+			const parsedNotes = NoteSchema.array().safeParse(fetchedNotes)
 			if (!parsedNotes.success) {
 				console.error("getNotes returned null")
 				setShowNoteLoadingIndicator(false)
 				return
 			}
 			console.log(`setting notes ${JSON.stringify(parsedNotes.data, null, 2)}`)
-			setNotes(parsedNotes.data)
-			setRefreshKey(prev => prev + 1)
+			if (!fetchedNotes) {
+				return
+			}
+			console.log(`prev notes: ${JSON.stringify(notes, null, 2)}`)
+			console.log(`new notes ${JSON.stringify(parsedNotes.data), null, 2}`)
+			const newNotes = [...notes, ...parsedNotes.data]
+			setNotes(newNotes)
 			setShowNoteLoadingIndicator(false)
-
 		})
 	}
 	useEffect(() => {
@@ -89,8 +99,7 @@ export default function HomeScreen() {
 						}
 					</View>
 					<View style={{ flex: 1, alignItems: "center" }}>
-						<Button title='get notes' onPress={getNotesSyncWrapper} />
-						<ScrollView key={refreshKey} style={{ flex: 1, width: "90%" }}>
+						<ScrollView style={{ flex: 1, width: "90%" }}>
 							<View>
 								{notes.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
 									.map((note, i) => {
@@ -103,6 +112,17 @@ export default function HomeScreen() {
 					</View>
 				</View>
 			</View>
+			<Button title='Last inn flere notater'
+				onPress={() => {
+					counterStore.incGetNotes()
+				}} />
+
+			{true && <Button title='debug'
+				onPress={() => {
+					counterStore.incGetNotes()
+					generateNotes(40)
+					setNotes([])
+				}} />}
 		</SafeAreaView>
 	);
 }

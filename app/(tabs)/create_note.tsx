@@ -174,7 +174,7 @@ export default function HomeScreen() {
 						<Button title="Fjern Bilde" onPress={() => pictureStore.setPictureRef(null)} />
 					</View>
 					{showImageUploadingIndicator &&
-						<LoadingIndicator body="Bildet lastes opp. Vær tålmodig" />
+						<LoadingIndicator testID="imageUploadingIndicatorId" body="Bildet lastes opp. Vær tålmodig" />
 					}
 
 					<Button testID='saveButton' disabled={showImageUploadingIndicator} title="lagre" onPress={() => {

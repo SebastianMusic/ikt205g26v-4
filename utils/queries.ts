@@ -61,9 +61,11 @@ async function uploadImageToSupabase(uuid: string) {
 	console.log(data)
 }
 
-export async function getNotes(): Promise<NoteType[] | string> {
+export async function getNotes(start: number, end: number): Promise<NoteType[] | string> {
 	console.log("entered get notes")
-	const { data, error } = await supabase.from("note").select();
+	const { data, error } = await supabase.from("note")
+		.select().order("created_at", { ascending: false })
+		.range(start, end);
 	if (error) {
 		console.log("data:", data)
 		console.error(error.message)

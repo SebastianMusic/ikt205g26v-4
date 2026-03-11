@@ -13,19 +13,29 @@ jest.mock('@/utils/supabase', () => ({
 		auth: { getClaims: () => mockGetClaims() },
 		from: jest.fn().mockReturnValue({
 			select: jest.fn().mockReturnValue({
-				data: [{
-					title: "note",
-					body: "body",
-					id: "123",
-					image_id: null,
-					created_at: "2026-03 - 11 13: 30",
-					user_id: "test"
-				}] as NoteType[],
-				error: null
+				order: jest.fn().mockReturnValue({
+					range: jest.fn().mockReturnValue({
+						data: [{
+							title: "note",
+							body: "body",
+							id: "123",
+							image_id: null,
+							created_at: "2026-03 - 11 13: 30",
+							user_id: "test"
+						}] as NoteType[],
+						error: null
+					})
+
+				})
 			})
 		})
 	}
 
+}))
+
+jest.mock('@faker-js/faker', () => ({
+	faker: {
+	}
 }))
 
 const mockNavigate = jest.fn().mockImplementation((...args) => {

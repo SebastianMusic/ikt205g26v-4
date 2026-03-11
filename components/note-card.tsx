@@ -67,6 +67,7 @@ export function NoteCard({ note }: { note: NoteType }) {
 				}>
 					{note.title}
 				</Text>
+				<Text style={{ fontSize: 10 }}>{new Date(note.created_at).toLocaleString()}</Text>
 
 			</View>
 
