@@ -58,7 +58,7 @@ global.alert = jest.fn()
 
 
 describe('(10%) Unit Test - Opprettelse & Navigasjon', () => {
-	test("", async () => {
+	test("(10%) Unit Test - Opprettelse & Navigasjon", async () => {
 		mockGetClaims.mockResolvedValue({ data: { user: { id: '123' } }, error: null })
 		render(<CreateNoteScreen />)
 		screen.debug()
@@ -75,7 +75,7 @@ describe('(15%) Integration Test - Mocking & Loader:', () => {
 	beforeEach(() => {
 		jest.clearAllMocks()
 	})
-	test("", async () => {
+	test("(15%) Integration Test - Mocking & Loader:", async () => {
 		render(<HomeScreen />)
 		const noteLoadingIndicator = screen.getByTestId("noteLoadingIndicator")
 		await waitFor(() => {
