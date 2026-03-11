@@ -39,7 +39,7 @@ jest.mock('@faker-js/faker', () => ({
 }))
 
 const mockNavigate = jest.fn().mockImplementation((...args) => {
-	console.log('mockNavigate called with:', args)
+	
 })
 jest.mock('expo-router', () => ({
 	useRouter: () => ({

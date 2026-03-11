@@ -10,7 +10,7 @@ export default function AuthTab({ children, path, ...props }: any) {
 	const handlePress = () => {
 		supabase.auth.getClaims().then(({ data, error }) => {
 			if (data == null || error) {
-				console.log(`data is: ${data}`)
+				
 				alert(`Du har ikke tilgang til ${path}. Logg inn først`)
 				return false
 			}

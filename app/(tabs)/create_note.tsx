@@ -51,7 +51,7 @@ export default function HomeScreen() {
 
 		if (!result.canceled) {
 			const image = result.assets[0]
-			console.log(`image picked: ${image}`)
+			
 			pictureStore.setPictureRef(image)
 		}
 
@@ -79,7 +79,7 @@ export default function HomeScreen() {
 
 
 	// useEffect(() => {
-	// 	console.log("inside use effect")
+	// 	
 	// 	getNotes().then(notes => {
 	// 		const parsedNotes = NoteSchema.array().safeParse(notes)
 	// 		if (parsedNotes.error) {
@@ -88,7 +88,7 @@ export default function HomeScreen() {
 	// 		}
 	// 		setNotes(parsedNotes.data)
 	// 	})
-	// 	console.log(" after")
+	// 	
 	// }, []);
 
 
@@ -116,7 +116,7 @@ export default function HomeScreen() {
 
 		createNote(note).then((result) => {
 			if (result) {
-				console.log('incremented counterstate')
+				
 				counterState.incGetNotes()
 				// clear input fields
 				setTitle("")

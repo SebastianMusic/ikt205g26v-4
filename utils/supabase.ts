@@ -15,8 +15,8 @@ if (supabaseKey == null) {
 	console.error("supabaseAnonKey is null")
 	process.exit()
 }
-console.log(supabaseUrl)
-console.log(supabaseKey)
+
+
 
 const nativeStorageAdapter = {
 	getItem: (key: string) => SecureStore.getItemAsync(key),

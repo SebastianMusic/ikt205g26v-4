@@ -15,7 +15,7 @@ export async function generateNotes(count: number) {
 	}
 	const userId = userData.user.id
 
-	console.log(`userid in generate notes is ${userId}`)
+	
 	for (i; i < count; i++) {
 		const note = {
 			title: faker.word.noun(),

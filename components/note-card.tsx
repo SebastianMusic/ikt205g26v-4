@@ -25,10 +25,10 @@ export function NoteCard({ note }: { note: NoteType }) {
 
 
 	function goToeditNote() {
-		console.log("logging note")
-		console.log(note.title)
-		console.log(note.body)
-		console.log("navigating to note")
+		
+		
+		
+		
 		router.push({
 			pathname: "/edit_note",
 			params: note
@@ -40,13 +40,13 @@ export function NoteCard({ note }: { note: NoteType }) {
 		if (!note.image_id) {
 			return
 		}
-		console.log(`note image id to fetch is: ${note.image_id}, for note with id ${note.id}`)
+		
 		getNoteImage(note.image_id).then((data) => {
 			if (!data) {
 				return
 			}
 			setNoteImage(data.signedUrl)
-			console.log(`data.singedUrl: ${data.signedUrl}`)
+			
 		}
 		)
 

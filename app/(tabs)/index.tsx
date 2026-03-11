@@ -26,7 +26,7 @@ export default function HomeScreen() {
 
 	useEffect(() => {
 		supabase.auth.getClaims().then(({ data, error }) => {
-			console.log("entered get claims")
+			
 			if (error) {
 				console.error(error.message)
 				return
@@ -36,13 +36,13 @@ export default function HomeScreen() {
 
 
 		supabase.auth.onAuthStateChange(() => {
-			console.log("entered onAuthStateChange ")
+			
 			supabase.auth.getClaims().then(({ data, error }) => {
 				if (error) {
 					console.error(error.message)
 					return
 				}
-				console.log("data: ", data)
+				
 				if (data) setClaims(data.claims)
 
 			})
@@ -56,18 +56,18 @@ export default function HomeScreen() {
 			console.error(error.message)
 			return
 		}
-		console.log("sign out: successfull")
+		
 		setClaims(null)
 
 	}
 
 	// if claims are valid redirct user to homescreen
 	useEffect(() => {
-		console.log("entered checking if claims are not null")
+		
 		if (claims != null) {
-			console.log("claims are not null")
-			console.log("claims: ", claims)
-			console.log("trying to navigate to home")
+			
+			
+			
 			router.navigate("/home")
 		} else {
 			console.warn("claims are null")

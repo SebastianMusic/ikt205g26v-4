@@ -39,26 +39,26 @@ export default function HomeScreen() {
 		const fetchStart = noteCount
 		const fetchEnd = noteCount + FETCH_INCREMENT - 1
 		getNotes(fetchStart, fetchEnd).then(fetchedNotes => {
-			console.log(`trying to fetch ${noteCount}, from ${fetchStart} to ${fetchEnd}`)
+			
 			const parsedNotes = NoteSchema.array().safeParse(fetchedNotes)
 			if (!parsedNotes.success) {
 				console.error("getNotes returned null")
 				setShowNoteLoadingIndicator(false)
 				return
 			}
-			console.log(`setting notes ${JSON.stringify(parsedNotes.data, null, 2)}`)
+			
 			if (!fetchedNotes) {
 				return
 			}
-			console.log(`prev notes: ${JSON.stringify(notes, null, 2)}`)
-			console.log(`new notes ${JSON.stringify(parsedNotes.data), null, 2}`)
+			
+			
 			const newNotes = [...notes, ...parsedNotes.data]
 			setNotes(newNotes)
 			setShowNoteLoadingIndicator(false)
 		})
 	}
 	useEffect(() => {
-		console.log("Getting Notes")
+		
 		getNotesSyncWrapper()
 		counterStore.incRender()
 	}, [counterStore.getNotes]);
@@ -166,7 +166,7 @@ async function uploadPushNotificationToken(pushToken: string) {
 		console.error(`Error uploading pushtoken ${error.message}`)
 		alert(`Error uploading pushtoken ${error.message} `)
 	}
-	console.log(`Successfull upload of pushtoken ${data}`)
+	
 }
 
 
@@ -203,13 +203,13 @@ async function registerForPushNotificationsAsync() {
 			if (!projectId) {
 				throw new Error('Project ID not found');
 			}
-			console.log(`Project ID is: ${projectId}`)
+			
 			token = (
 				await Notifications.getExpoPushTokenAsync({
 					projectId,
 				})
 			).data;
-			console.log(token);
+			
 		} catch (e) {
 			token = `${e}`;
 		}
@@ -218,7 +218,7 @@ async function registerForPushNotificationsAsync() {
 	}
 
 	if (token) {
-		console.log(`got pushtoken ${token}`)
+		
 		uploadPushNotificationToken(token)
 	}
 	return token;
