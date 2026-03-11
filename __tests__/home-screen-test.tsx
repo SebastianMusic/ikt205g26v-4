@@ -3,12 +3,27 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react-nativ
 
 import AuthTab from '@/components/AuthTab';
 import CreateNoteScreen from '@/app/(tabs)/create_note'
+import HomeScreen from '@/app/(tabs)/home'
 import Auth from '@/components/Auth';
+import { NoteType } from '@/utils/interface';
 
 const mockGetClaims = jest.fn()
 jest.mock('@/utils/supabase', () => ({
 	supabase: {
-		auth: { getClaims: () => mockGetClaims() }
+		auth: { getClaims: () => mockGetClaims() },
+		from: jest.fn().mockReturnValue({
+			select: jest.fn().mockReturnValue({
+				data: [{
+					title: "note",
+					body: "body",
+					id: "123",
+					image_id: null,
+					created_at: "2026-03 - 11 13: 30",
+					user_id: "test"
+				}] as NoteType[],
+				error: null
+			})
+		})
 	}
 
 }))
@@ -42,6 +57,21 @@ describe('(10%) Unit Test - Opprettelse & Navigasjon', () => {
 		await waitFor(() => {
 			expect(mockNavigate).toHaveBeenCalledWith('/home')
 		})
+	})
+})
+
+
+describe('(15%) Integration Test - Mocking & Loader:', () => {
+	beforeEach(() => {
+		jest.clearAllMocks()
+	})
+	test("", async () => {
+		render(<HomeScreen />)
+		const noteLoadingIndicator = screen.getByTestId("noteLoadingIndicator")
+		await waitFor(() => {
+			expect(noteLoadingIndicator).toBeVisible()
+		})
+		screen.debug()
 	})
 })
 

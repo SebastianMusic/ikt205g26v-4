@@ -17,7 +17,7 @@ import { KeyboardAwareScrollView, KeyboardToolbar } from 'react-native-keyboard-
 import { ScrollView } from 'react-native';
 import { supabase } from '@/utils/supabase';
 import { useRouter } from 'expo-router';
-import SebbeCamera from '@/components/Camera';
+import LoadingIndicator from '@/components/loadingIndicator';
 import * as ImagePicker from 'expo-image-picker'
 
 export default function HomeScreen() {
@@ -174,12 +174,7 @@ export default function HomeScreen() {
 						<Button title="Fjern Bilde" onPress={() => pictureStore.setPictureRef(null)} />
 					</View>
 					{showImageUploadingIndicator &&
-						<View style={{ ...StyleSheet.absoluteFillObject, flex: 1, justifyContent: "center", alignItems: "center" }}>
-							<View style={{ backgroundColor: '#ffffffee', padding: 20, borderRadius: 20, }}>
-								<ActivityIndicator size="large" style={{}} />
-								<Text style={{ fontSize: 20 }}>Bildet lastes opp. Vær tålmodig</Text>
-							</View>
-						</View>
+						<LoadingIndicator body="Bildet lastes opp. Vær tålmodig" />
 					}
 
 					<Button testID='saveButton' disabled={showImageUploadingIndicator} title="lagre" onPress={() => {

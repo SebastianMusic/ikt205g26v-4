@@ -1,5 +1,5 @@
 import { Image } from 'expo-image';
-import { Platform, StyleSheet, View, Text, ScrollView } from 'react-native';
+import { Button, Platform, StyleSheet, View, Text, ScrollView } from 'react-native';
 import { parse, z } from 'zod';
 
 import { HelloWave } from '@/components/hello-wave';
@@ -11,7 +11,6 @@ import { useCallback, useEffect, useState } from 'react';
 import { supabase } from '@/utils/supabase';
 import { getNotes, createNote } from '@/utils/queries'
 import { NoteSchema, NoteDTOSchema, NoteType, NoteDTOType } from '@/utils/interface';
-import { Button } from '@react-navigation/elements';
 import { NoteCard } from '@/components/note-card';
 import { useCounterStore } from '@/utils/store';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
@@ -22,6 +21,7 @@ import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
 import Constants from 'expo-constants';
 import { useNoteStore } from '@/utils/store';
+import LoadingIndicator from '@/components/loadingIndicator';
 
 export default function HomeScreen() {
 	const router = useRouter()
@@ -30,16 +30,21 @@ export default function HomeScreen() {
 	const notes = noteStore.notes
 	const setNotes = noteStore.setNotes
 	const [refreshKey, setRefreshKey] = useState(0)
+	const [showNoteLoadingIndicator, setShowNoteLoadingIndicator] = useState(false)
 	function getNotesSyncWrapper() {
+		setShowNoteLoadingIndicator(true)
 		getNotes().then(notes => {
 			const parsedNotes = NoteSchema.array().safeParse(notes)
 			if (!parsedNotes.success) {
 				console.error("getNotes returned null")
+				setShowNoteLoadingIndicator(false)
 				return
 			}
 			console.log(`setting notes ${JSON.stringify(parsedNotes.data, null, 2)}`)
 			setNotes(parsedNotes.data)
 			setRefreshKey(prev => prev + 1)
+			setShowNoteLoadingIndicator(false)
+
 		})
 	}
 	useEffect(() => {
@@ -65,6 +70,7 @@ export default function HomeScreen() {
 	return (
 
 		<SafeAreaView style={{ flex: 1 }}>
+			{showNoteLoadingIndicator && <LoadingIndicator testID="noteLoadingIndicator" body='Henter notater fra databasen. vær tålmodig' />}
 			<View style={{ flex: 1 }}>
 				<View style={{ alignItems: "center" }}>
 					<View>
@@ -83,6 +89,7 @@ export default function HomeScreen() {
 						}
 					</View>
 					<View style={{ flex: 1, alignItems: "center" }}>
+						<Button title='get notes' onPress={getNotesSyncWrapper} />
 						<ScrollView key={refreshKey} style={{ flex: 1, width: "90%" }}>
 							<View>
 								{notes.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())

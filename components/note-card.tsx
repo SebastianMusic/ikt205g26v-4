@@ -38,7 +38,6 @@ export function NoteCard({ note }: { note: NoteType }) {
 
 	useEffect(() => {
 		if (!note.image_id) {
-			console.error("note does not contain an image id ")
 			return
 		}
 		console.log(`note image id to fetch is: ${note.image_id}, for note with id ${note.id}`)
